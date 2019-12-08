@@ -43,18 +43,18 @@ const getList = (cate, page) => {
 
 const getData = async () => {
   const failArray = [], success = {}, failList = [], data = []
-  const cate = 'xycs'
-  let page = 137
+  const cate = 'jtll'
+  let page = 133
   while(page){
     try{
-      const list = await getList('xycs', 1)
+      const list = await getList(cate, page)
       console.log(cate, page, ' is sucess!')
       for(const { href, title } of list){
         try{
           const { content, time, description } = await getPage(href)
           console.log(title, 'is doen!')
           success[href] = true
-          $query('INSERT INTO `avv` (`title`, `description`, `content`, `time`) VALUES(?,?,?,?)',[title,description,content,time])
+          $query('INSERT INTO `avv` (`title`, `description`, `content`, `time`, `cate`, `href`) VALUES(?,?,?,?,?,?)',[title,description,content,time,cate,href])
             .then(e=>{
               console.log(title, 'save success!')
             }).catch(console.log)

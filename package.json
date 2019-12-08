@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/"
+    "dev": "nodemon src/",
+    "serve": "node src/"
   },
   "author": "QiaTia",
   "license": "ISC",
