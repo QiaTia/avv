@@ -44,7 +44,7 @@ const getList = (cate, page) => {
 const getData = async () => {
   const failArray = [], success = {}, failList = [], data = []
   const cate = 'xycs'
-  let page = 2 //137
+  let page = 137
   while(page){
     try{
       const list = await getList('xycs', 1)
@@ -58,7 +58,7 @@ const getData = async () => {
             .then(e=>{
               console.log(title, 'save success!')
             }).catch(console.log)
-          data.push({ content, time, description, title })
+          // data.push({ content, time, description, title })
         }catch(e){
           // console.log(e)
           console.log(title, 'is fail!')
@@ -75,11 +75,11 @@ const getData = async () => {
     writeFile(_failList, { "data": failList, d: Date.now() }, {}),
     writeFile(_success, { "data": success, d: Date.now() }, {}),
     writeFile(_fail, { "data": failArray, d: Date.now() }, {}),
-    writeFile(_filePath, { data, d: Date.now() }, {})
+    // writeFile(_filePath, { data, d: Date.now() }, {})
   ]).then(()=>process.exit(0))
 }
 
-$query("SELECT * FROM `avv` LIMIT 0 , 30").then(([item])=>console.log(item))
-// getData()
+// $query("SELECT * FROM `avv` LIMIT 0 , 30").then(([item])=>console.log(item))
+getData()
 // getPage("/xycs/2018/02/6511.html")
 // getList('xycs', 1).then(console.log).catch(console.log)
