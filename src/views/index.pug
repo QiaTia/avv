@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  div.container
+    div.col
+      div.article-list.col-md-8
+        div.page-warp
+          each item in data
+            article.article(role="article")
+              h3.entry-title
+                a(href='/article/'+item.id) #{ item.title }
+              div.entry-meta
+                span
+                  a(href='/tag/'+item.cate+'/1') 
+                    i.icon &#xec33;
+                    span &nbsp;&nbsp;
+                    span.tag-item.color #{ item.cate }
+                span
+                  i.icon &#xe64d;
+                  span #{ item.time }
+              div.entry-content #{ item.content }
+    div.el-pagination
+      -let now = 1, countPage = Math.ceil(count / pageSize)
+        if page!=1
+          button.btn-prev
+            a(href='./'+(~~page-1)) 上一页
+        else
+          button.btn-prev(disabled) 上一页
+      ul.el-pager
+        while countPage >= now
+          a(href=now!=page?'./'+now:'javascript:;')
+            li(class='number ' + (now!=page||'active')) #{ now++ }
+      if page!=countPage
+        button.btn-next
+          a(href='./'+(~~page+1)) 下一页
+      else
+        button.btn-next(disabled) 下一页

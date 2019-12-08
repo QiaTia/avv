@@ -15,8 +15,8 @@ const getPage = (targe) => {
     $http.get(targe).then(res=>{
       const $ = cheerio.load(res, {decodeEntities: false})
       const $container = $('div.container div.layout-box')
-      const content = $container.find('.details-content p').text().replace("时间：", '')
-      const time = $container.find('.news_details .news_top span').text()
+      const content = $container.find('.details-content p').html()
+      const time = $container.find('.news_details .news_top span').text().replace("时间：", '')
       const description = $container.find('.news_details h1').text()
       resolve({ content, time, description })
     }).catch(reject)
@@ -43,8 +43,8 @@ const getList = (cate, page) => {
 
 const getData = async () => {
   const failArray = [], success = {}, failList = [], data = []
-  const cate = 'jtll'
-  let page = 133
+  const cate = 'dsjq'
+  let page =  2//163
   while(page){
     try{
       const list = await getList(cate, page)

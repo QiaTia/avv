@@ -27,7 +27,7 @@ const getData = async () => {
     JSON.parse(await readFile(_fail)).data
   ]
   const fail = []
-  const cate = 'xycs'
+  const cate = 'jtll'
   for(const href of failArray){
     if(data[href]) continue
     try{

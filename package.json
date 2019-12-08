@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/",
-    "serve": "node src/"
+    "serve": "node src/",
+    "dev": "nodemon src/bin/www"
   },
   "author": "QiaTia",
   "license": "ISC",
@@ -15,6 +15,20 @@
     "cheerio": "^1.0.0-rc.3",
     "mysql": "^2.17.1",
     "nodemon": "^2.0.1",
-    "qs": "^6.9.1"
+    "qs": "^6.9.1",
+    "debug": "^4.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-convert": "^1.2.0",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.0",
+    "koa-onerror": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.0",
+    "koa2-cors": "^2.0.6",
+    "lint-staged": "^7.2.2",
+    "pug": "^2.0.3"
   }
 }
