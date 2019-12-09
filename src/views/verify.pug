@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  div.container
+    div(style="margin: 3em 0")
+      h3(style="text-align:center")=title
+    form(action="/verify" id="search")
+        div.search-input
+          label(for="secret" style="color: #888")
+            i.icon &#xe651;
+          input(type="text" id="secret" value=secret name="secret" placeholder="请输入密钥访问!")
+          input(type="hidden" value=targe name="targe")
+        div(style="display: flex;justify-content: flex-end;margin-top: .6em")
+          button.el-btn 提交
+    div.error-msg-wrap
+      p(style="color:#ff4081")=msg

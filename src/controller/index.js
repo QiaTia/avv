@@ -54,13 +54,11 @@ module.exports = {
     }
   },
   tagPage: async (ctx)=> {
-    console.log(1)
     const tag = ctx.params.tag || ctx.query.tag
     const s = ctx.params.s || ctx.query.s
     const page = ctx.params.page || ctx.query.page
     try{
       const data = await articlesQuery({s, tag, page})
-      console.log(data)
       return ctx.render('tag', {...data, tag:{ tag, s } })
     }catch(e){
       ctx.body = { code:400, msg:"No Data"}

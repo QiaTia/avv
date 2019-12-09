@@ -1,3 +1,13 @@
 @import 'default.css';
 @import 'public.css';
 @import 'icon.css';
+.el-btn{
+  height:36px;
+  line-height:36px;
+  font-size: 18px;
+  color: #888;
+  background:#fff;
+  border:1px solid #888;
+  border-radius:4px;
+  padding: 0 12px
+}
