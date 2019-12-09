@@ -19,6 +19,7 @@ const { article, articles, articlePage, tagPage, homePage } = require("../contro
 router.get('/article/:id', articlePage)
 router.get('/tag/:tag', tagPage)
 router.get('/tag/:tag/:page', tagPage)
+router.get('/seach/:s/:page', tagPage)
 router.get('/tag', tagPage)
 router.get('/json/article/:id', article)
 router.get('/json/articles', articles)
