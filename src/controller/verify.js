@@ -1,5 +1,6 @@
 const { $query } = require('../libs/util')
 const { signToken } = require('../libs/token')
+const { _exp = 1*8.64e4 } = require('../config')
 
 const verify = async (ctx)=>{
   const { _uid } = ctx.request
@@ -12,7 +13,7 @@ const verify = async (ctx)=>{
       return ctx.render('verify', { title: "认证", secret, targe, msg })
     }
     const token = signToken({ id })
-    ctx.cookies.set('authorization', token)
+    ctx.cookies.set('authorization', token, {maxAge:_exp})
     ctx.response.redirect(targe||'/')
     updata_verify(id, JSON.parse(info||'[]'), ctx.query, ctx.request)
   }

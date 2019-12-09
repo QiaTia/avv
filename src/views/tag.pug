@@ -20,16 +20,23 @@ block content
                   span #{ item.time }
               div.entry-content #{ item.content }
     div.el-pagination
-      -let now = 1, countPage = Math.ceil(count / pageSize)
+      -const countPage = Math.ceil(count / pageSize)
         if page!=1
           button.btn-prev
             a(href='./'+(~~page-1)) 上一页
         else
           button.btn-prev(disabled) 上一页
       ul.el-pager
-        while countPage >= now
-          a(href=now!=page?'./'+now:'javascript:;')
-            li(class='number ' + (now!=page||'active')) #{ now++ }
+        if(countPage < 7)
+          -let now = 1
+          while countPage >= now
+            a(href=now!=page?'./'+now:'javascript:;')
+              li(class='number ' + (now!=page||'active')) #{ now++ }
+        else
+          -let now = page - 3<1? 1:page-3, index = 1
+          while index++ <= 7
+            a(href=now!=page?'./'+now:'javascript:;')
+                li(class='number ' + (now!=page||'active')) #{ now++ }
       if page!=countPage
         button.btn-next
           a(href='./'+(~~page+1)) 下一页

@@ -18,15 +18,17 @@ const verifyToken = function(token){
 }
 
 const koaToken = async function(ctx, next){
-  const token = ctx.cookies.get('authorization')||ctx.request.headers["authorization"] || ctx.request.body.authorization
+  const token = ctx.cookies.get('authorization')||ctx.request.headers["authorization"]
   if(token){
     return verifyToken(token).then(async ({ id })=>{
-      // console.log(id)
+      console.log(id)
       ctx.request.auth = { id }
       ctx.request._uid = id
       await next()
     }).catch(()=>{
-      return ctx.body = {code: 401, msg: "Token is verify !"}  
+      ctx.cookies.set('authorization', '')
+      ctx.response.redirect('/verify?targe='+targe)
+      // return ctx.body = {code: 401, msg: "Token is verify !"}  
     })
   }else{
     const targe = ctx.request.url

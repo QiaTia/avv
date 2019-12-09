@@ -1,7 +1,6 @@
 const router = require('koa-router')()
 const fs = require("fs")
 const path = require("path")
-const { signToken } = require('../libs/token')
 const { verify } = require('../controller/verify')
 const { article, articles, articlePage, tagPage, homePage } = require("../controller")
 
