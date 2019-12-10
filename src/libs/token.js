@@ -21,7 +21,6 @@ const koaToken = async function(ctx, next){
   const token = ctx.cookies.get('authorization')||ctx.request.headers["authorization"]
   if(token){
     return verifyToken(token).then(async ({ id })=>{
-      console.log(id)
       ctx.request.auth = { id }
       ctx.request._uid = id
       await next()

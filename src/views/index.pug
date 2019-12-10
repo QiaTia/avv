@@ -34,7 +34,7 @@ block content
               li(class='number ' + (now!=page||'active')) #{ now++ }
         else
           -let now = page - 3<1? 1:page-3, index = 1
-          while index++ <= 7
+          while index++ <= 7 && now <= countPage
             a(href=now!=page?'./'+now:'javascript:;')
                 li(class='number ' + (now!=page||'active')) #{ now++ }
       if page!=countPage
