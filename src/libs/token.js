@@ -23,7 +23,12 @@ const koaToken = async function(ctx, next){
     return verifyToken(token).then(async ({ id })=>{
       ctx.request.auth = { id }
       ctx.request._uid = id
-      await next()
+      try{
+       await next()
+      }catch(e){
+        console.log(e)
+        // return ctx.body = { e, code: 500 }
+      }
     }).catch(()=>{
       ctx.cookies.set('authorization', '')
       ctx.response.redirect('/verify?targe='+targe)
@@ -32,7 +37,7 @@ const koaToken = async function(ctx, next){
   }else{
     const targe = ctx.request.url
     if(!/^\/verify/.test(targe) && !/\.[A-z]+$/.test(targe)) ctx.response.redirect('/verify?targe='+targe)
-    await next()
+    next()
   }
 }
 

@@ -1,5 +1,10 @@
 const { $query, $toNum, $calcPage } = require('../libs/util')
 
+let tagList = []
+
+;(async () =>{
+  return (await $query("SELECT distinct `cate` FROM `avv`")).map(({cate})=>tagList.push(cate))
+})()
 
 // 单条文章内容查询
 const articleQuery = async function(id){
@@ -20,6 +25,7 @@ const articlesQuery = async function({ s='',page=1, tag='', page_size, order_ind
   })
   return { data, page, pageSize, count }
 }
+
 
 module.exports = {
   article: async (ctx)=>{
@@ -48,7 +54,7 @@ module.exports = {
     try{
       const data= await articleQuery(id)
       if(!data) throw "this artile is not exist!"
-      return ctx.render('article', data)
+      return ctx.render('article', {...data, tag:{tag: data.cate}, tagList})
     }catch(e){
       ctx.body = { code:400, msg: "No Data!", e }
     }
@@ -59,7 +65,7 @@ module.exports = {
     const page = ctx.params.page || ctx.query.page
     try{
       const data = await articlesQuery({s, tag, page})
-      return ctx.render('tag', {...data, tag:{ tag, s } })
+      return ctx.render('tag', {...data, tag:{ tag, s }, tagList})
     }catch(e){
       ctx.body = { code:400, msg:"No Data"}
     }
@@ -68,7 +74,7 @@ module.exports = {
     const page = ctx.params.page || ctx.query.page
     try{
       const data = await articlesQuery({ page })
-      return ctx.render('index', { ...data })
+      return ctx.render('index', { ...data, tag: {}, tagList })
     }catch(e){
       ctx.body = { code:400, msg:"No Data"}
     }

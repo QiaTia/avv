@@ -20,11 +20,12 @@ router.get('/auth', async ctx =>{
   const { auth } = ctx.request
   return ctx.body = { "code": 200, auth }
 })
-router.get('/verify', verify)
+router.all('/verify', verify)
 router.get('/article/:id', articlePage)
 router.get('/tag/:tag', tagPage)
 router.get('/tag/:tag/:page', tagPage)
-router.get('/seach/:s/:page', tagPage)
+router.get('/search/:s/:page', tagPage)
+router.get('/search', tagPage)
 router.get('/tag', tagPage)
 router.get('/json/article/:id', article)
 router.get('/json/articles', articles)

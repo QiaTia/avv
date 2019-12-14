@@ -6,4 +6,45 @@ html
     link(rel="icon" type="image/x-icon" href="/favicon.ico")
     link(href='/style/style.css' rel="stylesheet")
   body
-    block content
+    div.head-banner
+      div.boom-banner
+        nav.nav-appbar
+          div.container
+            ul.nav-meun
+              li(class=(tag&&tag.tag||'active'))
+                a(href='/') 首页
+              each val in tagList
+                li(class=(tag&&tag.tag==val&&'active'))
+                  a(href='/tag/'+val+'/1') #{ val }
+            div.nav-right
+              ul.nav-meun
+                li
+                  a(href='javascript:searchShow();')
+                    i.icon &#xe651
+
+    div.container
+      block content
+    div#upTop(onclick="upTop()")
+      div.circle
+        //- 左半边圆
+        div.circle_left
+          div.clip_left
+        //- 右半边圆
+        div.circle_right
+          .clip_right
+        button.center
+          i.icon &#xe65d;
+    div.search-fot
+      form.search-form.container(action="./search.php")
+        div.search-input
+          label(for="s" style="color: #fff")
+            i.icon &#xe651;
+          input(type="text" name="s" placeholder="您想搜索什么？")
+        div.seach-keyword
+          ul
+            li
+              a(href="/tag/xycs/1") xycs
+            each val in ['妹', '姐', 'h', 'G', 'Y']
+              li
+                a(href="/search/"+ val +'/1') #{ val }
+    script(src="/js/index.js")
