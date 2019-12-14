@@ -8,19 +8,19 @@ html
   body
     div.head-banner
       div.boom-banner
-        nav.nav-appbar
-          div.container
+      nav.nav-appbar
+        div.container
+          ul.nav-meun
+            li(class=(tag&&tag.tag||'active'))
+              a(href='/') 首页
+            each val in tagList
+              li(class=(tag&&tag.tag==val&&'active'))
+                a(href='/tag/'+val+'/1') #{ val }
+          div.nav-right
             ul.nav-meun
-              li(class=(tag&&tag.tag||'active'))
-                a(href='/') 首页
-              each val in tagList
-                li(class=(tag&&tag.tag==val&&'active'))
-                  a(href='/tag/'+val+'/1') #{ val }
-            div.nav-right
-              ul.nav-meun
-                li
-                  a(href='javascript:searchShow();')
-                    i.icon &#xe651
+              li
+                a(href='javascript:searchShow();')
+                  i.icon &#xe651
 
     div.container
       block content

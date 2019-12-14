@@ -197,7 +197,7 @@ button:hover {
 @media (min-width:600px){ 
 	.foot>div{width:calc(100%/3);float:left}
 	.slide-btn{display:block}
-	.head-banner{background-image:url(//tia.nos-eastchina1.126.net/public/acg/nav-bg.png);height:180px}
+	.head-banner{background-image:url(//i.qiatia.cn/public/images/nav-bg.png);height:180px}
 	.boom-banner{height:129px;width:100%}
 	.img-banner{height:300px}
 	.img-banner>a,.img-banner>a>img{height:300px;}
