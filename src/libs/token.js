@@ -1,5 +1,5 @@
 const JWT = require('jsonwebtoken')
-const { _exp = 1*8.64e4, _secret } = require('../config')
+const { _exp, _secret } = require('../config')
 
 const signToken = function (user){
   return JWT.sign(user, _secret, { expiresIn: _exp});

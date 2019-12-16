@@ -31,7 +31,7 @@ const verify = async (ctx)=>{
       return ;
     }
     const token = signToken({ id })
-    ctx.cookies.set('authorization', token, { maxAge:_exp })
+    ctx.cookies.set('authorization', token, { maxAge:_exp*1e3 })
     ctx.response.redirect(targe||'/')
     updata_verify(id, JSON.parse(info||'[]'), ctx.query, ctx.request)
   }
