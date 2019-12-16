@@ -37,7 +37,11 @@ const koaToken = async function(ctx, next){
   }else{
     const targe = ctx.request.url
     if(!/^\/verify/.test(targe) && !/\.[A-z]+$/.test(targe)) ctx.response.redirect('/verify?targe='+targe)
-    next()
+    try{
+      await next()
+     }catch(e){
+       console.log(e)
+     }
   }
 }
 

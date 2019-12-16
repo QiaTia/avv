@@ -23,7 +23,12 @@ const verify = async (ctx)=>{
     if(!id){
       const msg = '你输入的密钥不正确, 请重试!'
       // return ctx.body = { title: "认证", secret, targe, msg }
-      return ctx.render('verify', { title: "认证", secret, targe, msg })
+      try{
+        await ctx.render('verify', { title: "认证", secret, targe, msg, tagList: []})
+      }catch(e){
+        console.log(e)
+      }
+      return ;
     }
     const token = signToken({ id })
     ctx.cookies.set('authorization', token, {maxAge:_exp})

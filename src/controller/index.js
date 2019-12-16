@@ -6,6 +6,7 @@ let tagList = []
   return (await $query("SELECT distinct `cate` FROM `avv`")).map(({cate})=>tagList.push(cate))
 })()
 
+// setTimeout(()=>console.log(tagList),1e3)
 // 单条文章内容查询
 const articleQuery = async function(id){
   const [ data ] = await $query("SELECT * FROM `avv` WHERE `id` = ? ", [id])
