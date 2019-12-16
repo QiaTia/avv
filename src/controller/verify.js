@@ -1,6 +1,6 @@
 const { $query } = require('../libs/util')
 const { signToken } = require('../libs/token')
-const { _exp = 1*8.64e4 } = require('../config')
+const { _exp } = require('../config')
 
 const secret_verify = async(secret)=>{
   const [ data ] = await $query('SELECT `id`,`info` FROM `secret` WHERE `secret` = ?', [secret])
@@ -10,7 +10,7 @@ const secret_verify = async(secret)=>{
 const updata_verify = async(id, info, query, request)=>{
   info.push({ query, request, "time": Date.now()})
   $query("UPDATE `secret` SET `info` = ? WHERE `id` = ?", [JSON.stringify(info), id])
-    .then(e=>console.log('资料更新成功!',e))
+    .then(e=>console.log('资料更新成功!',e.message))
     .catch(console.log)
 }
 
@@ -31,7 +31,7 @@ const verify = async (ctx)=>{
       return ;
     }
     const token = signToken({ id })
-    ctx.cookies.set('authorization', token, {maxAge:_exp})
+    ctx.cookies.set('authorization', token, { maxAge:_exp })
     ctx.response.redirect(targe||'/')
     updata_verify(id, JSON.parse(info||'[]'), ctx.query, ctx.request)
   }

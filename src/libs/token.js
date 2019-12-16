@@ -8,40 +8,30 @@ const signToken = function (user){
 const verifyToken = function(token){
   return new Promise((resolve, reject)=>{
     JWT.verify(token, _secret, function (err, decode) {
-      if (err) {       
-        reject(err)           
-      } else {
-        resolve(decode)
-      }
+      if (err) reject(err)           
+      else resolve(decode)
     })
   })
 }
 
 const koaToken = async function(ctx, next){
+  const targe = ctx.request.url
+  if(/\.[A-z]+$/.test(targe)) return next()
   const token = ctx.cookies.get('authorization')||ctx.request.headers["authorization"]
-  if(token){
-    return verifyToken(token).then(async ({ id })=>{
-      ctx.request.auth = { id }
-      ctx.request._uid = id
-      try{
-       await next()
-      }catch(e){
-        console.log(e)
-        // return ctx.body = { e, code: 500 }
-      }
-    }).catch(()=>{
-      ctx.cookies.set('authorization', '')
-      ctx.response.redirect('/verify?targe='+targe)
-      // return ctx.body = {code: 401, msg: "Token is verify !"}  
-    })
+  if(!token){
+    if(!/^\/verify/.test(targe)) return ctx.response.redirect('/verify?targe='+targe)
+    return next()
   }else{
-    const targe = ctx.request.url
-    if(!/^\/verify/.test(targe) && !/\.[A-z]+$/.test(targe)) ctx.response.redirect('/verify?targe='+targe)
+    let info = {}
     try{
-      await next()
-     }catch(e){
-       console.log(e)
-     }
+      info = await verifyToken(token)
+    }catch(e){
+      ctx.cookies.set('authorization', '')
+      return ctx.response.redirect('/verify?targe=' + targe)
+    }
+    ctx.request.auth = info
+    ctx.request._uid = info.id
+    await next()
   }
 }
 
